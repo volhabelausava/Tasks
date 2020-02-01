@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="198ed8c0-2a95-45d0-a35f-f30fd2827859" name="Default Changelist" comment="Add Comment entity (with relation to Task entity)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/binlog.000004" beforeDir="false" afterPath="$PROJECT_DIR$/data/binlog.000004" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ib_logfile0" beforeDir="false" afterPath="$PROJECT_DIR$/data/ib_logfile0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ibdata1" beforeDir="false" afterPath="$PROJECT_DIR$/data/ibdata1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/mysql.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/data/mysql.ibd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tasks/comment.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/data/tasks/comment.ibd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tasks/task.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/data/tasks/task.ibd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/undo_001" beforeDir="false" afterPath="$PROJECT_DIR$/data/undo_001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/undo_002" beforeDir="false" afterPath="$PROJECT_DIR$/data/undo_002" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/TaskRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/TaskRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/task/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/task/index.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -234,7 +225,7 @@
       <updated>1580494716794</updated>
       <workItem from="1580494718059" duration="3483000" />
       <workItem from="1580498423103" duration="9140000" />
-      <workItem from="1580523354296" duration="27598000" />
+      <workItem from="1580523354296" duration="35536000" />
     </task>
     <servers />
   </component>
