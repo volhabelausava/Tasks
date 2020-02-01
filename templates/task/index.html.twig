@@ -3,8 +3,16 @@
 {% block title %}Мои задачи{% endblock %}
 
 {% block body %}
-    <h1 class="text-secondary">Мои задачи</h1>
+    <h1 class="text-secondary mt-3">Мои задачи</h1>
     <a class="btn btn-outline-secondary my-3" role="button" href="{{ path('task_new') }}">Создать задачу</a>
+    {% for message in app.flashes('success') %}
+        <span class="valid-feedback d-block mb-2">
+            <span class="d-block">
+                <span class="badge badge-success text-uppercase">Success</span>
+                <span>{{ message }}</span>
+            </span>
+        </span>
+    {% endfor %}
     <div class="row">
         <div class="col">
             <h2 class="text-center bg-primary text-white rounded-top mb-0">TODO</h2>

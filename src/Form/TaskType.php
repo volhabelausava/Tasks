@@ -4,6 +4,9 @@ namespace App\Form;
 
 use App\Entity\Task;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,11 +15,20 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('status')
-            ->add('createDate')
-        ;
+            ->add('name', TextType::class, [
+                'label' => 'Имя'
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Описание'
+            ])
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'TODO' => Task::STATUS_TODO,
+                    'DOING' => Task::STATUS_DOING,
+                    'DONE' => Task::STATUS_DONE
+                ],
+                'label' => 'Статус'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

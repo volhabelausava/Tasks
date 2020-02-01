@@ -35,10 +35,12 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $task->setCreateDate(new \DateTime(null, new \DateTimeZone('Europe/Minsk') ));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
             $entityManager->flush();
 
+            $this-> addFlash('success', 'Задача добавлена');
             return $this->redirectToRoute('task_index');
         }
 
