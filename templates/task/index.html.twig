@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Мои задачи{% endblock %}
+
+{% block body %}
+    <h1 class="text-secondary">Мои задачи</h1>
+    <a class="btn btn-outline-secondary my-3" role="button" href="{{ path('task_new') }}">Создать задачу</a>
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center bg-primary text-white rounded-top mb-0">TODO</h2>
+            {% for task in tasks %}
+                <div class="border border-primary">
+                    <h3>{{ task.name }}</h3>
+                    <a href="{{ path('task_edit', {'id': task.id}) }}">edit</a>
+                </div>
+            {% else %}
+                <div class="border border-primary">
+                    <p class="text-center text-secondary mt-2">Здесь ничего нет</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col">
+            <h2 class="text-center bg-warning text-white rounded-top mb-0">DOING</h2>
+            {% for task in tasks %}
+                <div class="border border-warning">
+                    <h3>{{ task.name }}</h3>
+                    <a href="{{ path('task_edit', {'id': task.id}) }}">edit</a>
+                </div>
+            {% else %}
+                <div class="border border-warning">
+                    <p class="text-center text-secondary mt-2">Здесь ничего нет</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col">
+            <h2 class="text-center bg-success text-white rounded-top mb-0">DONE</h2>
+            {% for task in tasks %}
+                <div class="border border-success">
+                    <h3>{{ task.name }}</h3>
+                    <a href="{{ path('task_edit', {'id': task.id}) }}">edit</a>
+                </div>
+            {% else %}
+                <div class="border border-success">
+                    <p class="text-center text-secondary mt-2">Здесь ничего нет</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
