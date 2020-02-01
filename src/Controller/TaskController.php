@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +21,13 @@ class TaskController extends AbstractController
      */
     public function index(TaskRepository $taskRepository): Response
     {
+        $tasksToDo = $taskRepository->findByStatusField(Task::STATUS_TODO);
+        $tasksDoing = $taskRepository->findByStatusField(Task::STATUS_DOING);
+        $tasksDone = $taskRepository->findByStatusField(Task::STATUS_DONE);
         return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasksToDo' => $tasksToDo,
+            'tasksDoing' => $tasksDoing,
+            'tasksDone' => $tasksDone
         ]);
     }
 

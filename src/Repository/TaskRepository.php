@@ -19,6 +19,27 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+     /**
+      * Gets the array of results for the filtered by status query.
+      *
+      * @param $status int
+      * @return array
+      */
+    public function findByStatusField($status)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT t.id, t.name, t.description, COUNT(c.task) AS comments_quantity
+                FROM App\Entity\Task t
+                LEFT JOIN t.comments c
+                WHERE t.status=:status
+                GROUP BY t.id
+                ORDER BY t.createDate ASC'
+        );
+        $query->setParameter('status', $status);
+
+        return $query->getArrayResult();
+    }
+
     // /**
     //  * @return Task[] Returns an array of Task objects
     //  */
