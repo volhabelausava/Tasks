@@ -25,17 +25,18 @@ class TaskRepository extends ServiceEntityRepository
       * @param $status int
       * @return array
       */
-    public function findByStatusField($status)
+    public function findByStatusField($status, $user)
     {
         $query = $this->_em->createQuery(
             'SELECT t.id, t.name, t.description, COUNT(c.task) AS comments_quantity
                 FROM App\Entity\Task t
                 LEFT JOIN t.comments c
-                WHERE t.status=:status
+                WHERE t.status=:status and t.user=:id
                 GROUP BY t.id
                 ORDER BY t.createDate ASC'
         );
         $query->setParameter('status', $status);
+        $query->setParameter('id', $user->getId());
 
         return $query->getArrayResult();
     }

@@ -22,9 +22,10 @@ class TaskController extends AbstractController
      */
     public function index(TaskRepository $taskRepository): Response
     {
-        $tasksToDo = $taskRepository->findByStatusField(Task::STATUS_TODO);
-        $tasksDoing = $taskRepository->findByStatusField(Task::STATUS_DOING);
-        $tasksDone = $taskRepository->findByStatusField(Task::STATUS_DONE);
+        $user = $this->getUser();
+        $tasksToDo = $taskRepository->findByStatusField(Task::STATUS_TODO, $user);
+        $tasksDoing = $taskRepository->findByStatusField(Task::STATUS_DOING, $user);
+        $tasksDone = $taskRepository->findByStatusField(Task::STATUS_DONE, $user);
         return $this->render('task/index.html.twig', [
             'tasksToDo' => $tasksToDo,
             'tasksDoing' => $tasksDoing,
@@ -43,6 +44,7 @@ class TaskController extends AbstractController
 
         if ($formTask->isSubmitted() && $formTask->isValid()) {
             $task->setCreateDate(new \DateTime(null, new \DateTimeZone('Europe/Minsk') ));
+            $task->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
             $entityManager->flush();
