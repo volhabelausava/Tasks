@@ -3,11 +3,53 @@
 {% block title %}Edit Task{% endblock %}
 
 {% block body %}
-    <h1>Edit Task</h1>
+    <a href="{{ path('task_index') }}" class="small ml-3">Вернуться к списку задач</a>
+    <h1 class="text-success ml-3">Редактировать задачу</h1>
 
-    {{ include('task/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="row mt-3">
+        <div class="col-5">
 
-    <a href="{{ path('task_index') }}">back to list</a>
+{# Update Task Form #}
+            <div class="ml-3 border rounded p-3">
+                {{ form_start(formTask, {'attr' : {'novalidate' : 'novalidate'}}) }}
+                    {{ form_row(formTask.name, {'attr' : {'readonly' : 'readonly', 'class' : 'form-control p-4'}}) }}
+                    {{ form_row(formTask.description, {'attr' : {'readonly' : 'readonly', 'class' : 'form-control pl-4 py-2'}}) }}
+                    {{ form_row(formTask.status) }}
+                    <button class="btn btn-success btn-lg">Обновить</button>
+                {{ form_end(formTask) }}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="ml-3 border rounded p-3">
+            <h5>Комментарии</h5>
 
-    {{ include('task/_delete_form.html.twig') }}
+{# Success message when new comment was added #}
+                {% for message in app.flashes('success') %}
+                    <span class="valid-feedback d-block mb-2">
+                        <span class="d-block">
+                            <span class="badge badge-success text-uppercase">Success</span>
+                            <span>{{ message }}</span>
+                        </span>
+                    </span>
+                {% endfor %}
+
+{# Display all comments for task #}
+            {% if not task.comments.isEmpty %}
+                <ul class="list-group mb-3">
+                    {% for comment in task.comments %}
+                        <li class="list-group-item border-left-0 border-right-0 border-top-0">{{ comment.content }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-secondary mt-2">Комментариев еще нет.</p>
+            {% endif %}
+
+{# Add Comment Form #}
+            {{ form_start(formComment, {'attr' : {'novalidate' : 'novalidate'}}) }}
+                {{ form_row(formComment.content) }}
+                <button class="btn btn-success btn-lg">Добавить</button>
+            {{ form_end(formComment) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

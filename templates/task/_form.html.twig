@@ -1,6 +1,0 @@
-{{ form_start(form, {'attr' : {'novalidate' : 'novalidate'}}) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description, {'attr' : {'rows' : 4}}) }}
-    {{ form_row(form.status) }}
-    <button class="btn btn-success">{{ button_label|default('Создать') }}</button>
-{{ form_end(form) }}

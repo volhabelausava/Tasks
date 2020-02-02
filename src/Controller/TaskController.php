@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Task;
+use App\Form\CommentType;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,10 +38,10 @@ class TaskController extends AbstractController
     public function new(Request $request): Response
     {
         $task = new Task();
-        $form = $this->createForm(TaskType::class, $task);
-        $form->handleRequest($request);
+        $formTask = $this->createForm(TaskType::class, $task);
+        $formTask->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formTask->isSubmitted() && $formTask->isValid()) {
             $task->setCreateDate(new \DateTime(null, new \DateTimeZone('Europe/Minsk') ));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
@@ -52,7 +53,7 @@ class TaskController extends AbstractController
 
         return $this->render('task/new.html.twig', [
             'task' => $task,
-            'form' => $form->createView(),
+            'formTask' => $formTask->createView(),
         ]);
     }
 
@@ -67,22 +68,39 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="task_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="task_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Task $task): Response
     {
-        $form = $this->createForm(TaskType::class, $task);
-        $form->handleRequest($request);
+        $comment = new Comment();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formTask = $this->createForm(TaskType::class, $task);
+        $formComment = $this->createForm(CommentType::class, $comment);
+
+        $formTask->handleRequest($request);
+        $formComment->handleRequest($request);
+
+        if ($formTask->isSubmitted() && $formTask->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Задача обновлена');
 
             return $this->redirectToRoute('task_index');
         }
 
+        if ($formComment->isSubmitted() && $formComment->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comment->setTask($task);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $this->addFlash('success', 'Комментарий добавлен');
+
+            return $this->redirectToRoute('task_edit', ['id' => $task->getId()]);
+        }
+
         return $this->render('task/edit.html.twig', [
             'task' => $task,
-            'form' => $form->createView(),
+            'formTask' => $formTask->createView(),
+            'formComment' => $formComment->createView(),
         ]);
     }
 

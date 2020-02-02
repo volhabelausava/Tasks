@@ -3,7 +3,7 @@
 {% block title %}Мои задачи{% endblock %}
 
 {% block body %}
-    <h1 class="text-secondary mt-3">Мои задачи</h1>
+    <h1 class="mt-3">Мои задачи</h1>
     <a class="btn btn-outline-secondary my-3" role="button" href="{{ path('task_new') }}">Создать задачу</a>
     {% for message in app.flashes('success') %}
         <span class="valid-feedback d-block mb-2">
