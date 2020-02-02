@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Exception\StatusNotValidException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -99,6 +100,10 @@ class Task
 
     public function setStatus(int $status): self
     {
+        if (($status > 3) || ($status < 0)) {
+            throw new StatusNotValidException('Invalid task status was tried to set. 
+            Task status must be from 1 to 3.');
+        }
         $this->status = $status;
 
         return $this;

@@ -48,7 +48,6 @@ class TaskController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($task);
             $entityManager->flush();
-
             $this-> addFlash('success', 'Задача добавлена');
             return $this->redirectToRoute('task_index');
         }

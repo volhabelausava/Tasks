@@ -23,6 +23,7 @@ class TaskRepository extends ServiceEntityRepository
       * Gets the array of results for the filtered by status query.
       *
       * @param $status int
+      * @param $user
       * @return array
       */
     public function findByStatusField($status, $user)
