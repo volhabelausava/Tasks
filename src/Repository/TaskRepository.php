@@ -26,7 +26,7 @@ class TaskRepository extends ServiceEntityRepository
       * @param $user
       * @return array
       */
-    public function findByStatusField($status, $user)
+    public function findByStatusField($status, $user) : array
     {
         $query = $this->_em->createQuery(
             'SELECT t.id, t.name, t.description, COUNT(c.task) AS comments_quantity
@@ -42,32 +42,22 @@ class TaskRepository extends ServiceEntityRepository
         return $query->getArrayResult();
     }
 
-    // /**
-    //  * @return Task[] Returns an array of Task objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * Gets the array of task data for the user ordered by created date.
+      *
+      * @param $user
+      * @return array
+      */
+    public function findArrayBy($user) : array
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this->_em->createQuery(
+            'SELECT t.id, t.name, t.description, t.status, t.createDate
+                FROM App\Entity\Task t
+                WHERE t.user=:id              
+                ORDER BY t.createDate ASC'
+        );
+        $query->setParameter('id', $user->getId());
 
-    /*
-    public function findOneBySomeField($value): ?Task
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getArrayResult();
     }
-    */
 }

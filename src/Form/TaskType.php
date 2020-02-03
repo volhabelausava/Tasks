@@ -28,7 +28,7 @@ class TaskType extends AbstractType
                 'choices' => [
                     'TODO' => Task::STATUS_TODO,
                     'DOING' => Task::STATUS_DOING,
-                    'DONE' => Task::STATUS_DONE
+                    'DONE' => Task::STATUS_DONE,
                 ],
                 'label' => 'Статус',
                 'label_attr' => ['class' => 'h5']

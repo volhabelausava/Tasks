@@ -100,9 +100,11 @@ class Task
 
     public function setStatus(int $status): self
     {
-        if (($status > 3) || ($status < 0)) {
-            throw new StatusNotValidException('Invalid task status was tried to set. 
-            Task status must be from 1 to 3.');
+        if (($status != Task::STATUS_TODO) &&
+            ($status != Task::STATUS_DONE) &&
+            ($status != Task::STATUS_DOING))
+        {
+            throw new StatusNotValidException('Failed to update task status.');
         }
         $this->status = $status;
 

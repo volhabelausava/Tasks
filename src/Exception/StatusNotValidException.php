@@ -2,6 +2,7 @@
 
 namespace App\Exception;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class StatusNotValidException extends \RuntimeException implements HttpExceptionInterface
@@ -12,9 +13,9 @@ class StatusNotValidException extends \RuntimeException implements HttpException
      *
      * @return int An HTTP response status code
      */
-    public function getStatusCode()
+    public function getStatusCode() : int
     {
-        return \Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN;
+        return Response::HTTP_BAD_REQUEST;
     }
 
     /**
@@ -22,7 +23,7 @@ class StatusNotValidException extends \RuntimeException implements HttpException
      *
      * @return array Response headers
      */
-    public function getHeaders()
+    public function getHeaders() : array
     {
         return [];
     }
