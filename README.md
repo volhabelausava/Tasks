@@ -12,7 +12,7 @@ $ docker-compose up -d
 ```
 > now install all needed composer dependencies
 ```shell
-$ composer install
+$ docker-compose run --rm tasks-php-cli composer install
 ```
 > next step is to create the database tables with migrations
 ```shell
